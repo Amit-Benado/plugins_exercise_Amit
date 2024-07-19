@@ -74,7 +74,7 @@ class DummyApiPlugin(Plugin):
                 response = requests.get(endpoint)
                 if response.status_code == 200:
                     comment = response.json().get('comments')
-                    comments_by_post[this_post] = comment
+                    comments_by_post[this_post['id']] = comment
                 else:
                     print(f"Failed attempt: {response.status_code}")
             except requests.RequestException as e:
