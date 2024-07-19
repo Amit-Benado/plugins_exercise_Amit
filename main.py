@@ -7,13 +7,7 @@ def main():
     password = "emilyspass"
     plugin = DummyApiPlugin(url, username, password)
 
-    success = plugin.connectivity_test()
-
-    if success:
-        print("Success.")
-    else:
-        print("Failed attempt.")
-
+    plugin.run()
 
 if __name__ == '__main__':
     main()
