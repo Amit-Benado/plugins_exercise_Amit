@@ -45,3 +45,20 @@ class DummyApiPlugin(Plugin):
         except requests.RequestException as e:
             print(f"Error: {e}")
             return None
+
+    def posts(self):
+        # limit of 60 posts
+        endpoint = f"{self.url}/posts?limit=60"
+        try:
+            #GET request
+            response = requests.get(endpoint)
+            if response.status_code == 200:
+                data = response.json().get('posts')
+                return data
+            else:
+                print("Failed attempt:", response.status_code)
+                return None
+        except requests.RequestException as e:
+            print(f"Error retrieving posts: {e}")
+            return None
+
