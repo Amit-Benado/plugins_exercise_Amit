@@ -65,7 +65,7 @@ class DummyApiPlugin(Plugin):
     def comments(self):
         # posts with comments
         posts = self.posts()
-        # array for comments per post
+        # dictionary for comments per post
         comments_by_post = {}
         # go over posts
         for this_post in posts:
@@ -80,5 +80,15 @@ class DummyApiPlugin(Plugin):
             except requests.RequestException as e:
                 print(f"Failed attempt: {e}")
         return comments_by_post
+
+    def collect(self):
+        user_details = self.authenticated_user()
+        print("Details of authenticated user:", user_details)
+
+        posts = self.posts()
+        print("60 Posts:", posts)
+
+        posts_with_comments = self.comments()
+        print("60- Posts with Comments:", posts_with_comments)
 
 
