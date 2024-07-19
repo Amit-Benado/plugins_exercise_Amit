@@ -62,3 +62,23 @@ class DummyApiPlugin(Plugin):
             print(f"Error retrieving posts: {e}")
             return None
 
+    def comments(self):
+        # posts with comments
+        posts = self.posts()
+        # array for comments per post
+        comments_by_post = {}
+        # go over posts
+        for this_post in posts:
+            endpoint = f"{self.url}/posts/{this_post['id']}/comments"
+            try:
+                response = requests.get(endpoint)
+                if response.status_code == 200:
+                    comment = response.json().get('comments')
+                    comments_by_post[this_post] = comment
+                else:
+                    print(f"Failed attempt: {response.status_code}")
+            except requests.RequestException as e:
+                print(f"Failed attempt: {e}")
+        return comments_by_post
+
+
